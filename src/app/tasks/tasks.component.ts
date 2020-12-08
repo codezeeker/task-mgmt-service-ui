@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TasksService } from '../tasks.service';
+import { TasksService } from '../services/tasks.service';
 
 @Component({
   selector: 'tasks',
@@ -9,17 +9,17 @@ import { TasksService } from '../tasks.service';
 export class TasksComponent implements OnInit {
 
   tasks;
-  status;
-  id;
+
   constructor(private service: TasksService) {
-    this.tasks = this.service.getTasks();
    }
 
   ngOnInit(): void {
-    //
-    //code to fetch all tasks from the backend
-    //
-    //
+    this.service.getAllTasks().subscribe(
+      (response:any[]) => { 
+        this.tasks = response;
+      }
+    );
+    console.log(this.tasks);
     
   }
 
